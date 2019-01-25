@@ -184,6 +184,7 @@ class _UnixSelectorEventLoop(selector_events.BaseSelectorEventLoop):
                                          stdin, stdout, stderr, bufsize,
                                          extra=None, **kwargs):
         with events.get_child_watcher() as watcher:
+            watcher.attach_loop(self)
             waiter = self.create_future()
             transp = _UnixSubprocessTransport(self, protocol, args, shell,
                                               stdin, stdout, stderr, bufsize,
